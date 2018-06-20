@@ -1,7 +1,7 @@
 nQueens
 -------
 
-![diagram of n-queens problem](https://github.com/callumfrance/nQueens/blob/master/8queens.jpg)
+![diagram of n-queens problem](https://raw.githubusercontent.com/callumfrance/nQueens/master/8queens.jpg)
 
 This program randomly places queens on a chess board so that no queen will
 be able to capture another queen.
