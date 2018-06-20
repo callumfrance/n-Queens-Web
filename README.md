@@ -1,3 +1,18 @@
+nQueens
+-------
+
+This program randomly places queens on a chess board so that no queen will
+be able to capture another queen.
+The number of Queens for a 'full solve' is equal to the dimensions of the
+board - i.e. an 8x8 board has a full solve of 8 queens.
+This program places Queens randomly, so using numbers bigger than 5 will
+almost certainly only give a partial solve.
+
+
+Also note that nQueens is impossible for `n = 3` or `n = 4` (which you can
+see by running the program).
+
+
 1. Create Board using 'n'
 	- create n^2 elements
 		- each element is placed in a grid formation on the board
