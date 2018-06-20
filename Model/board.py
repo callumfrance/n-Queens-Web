@@ -3,6 +3,21 @@ from number_element import NumberElement
 
 
 class Board:
+    """
+    Attributes
+    ----------
+        n : int
+            The dimensions of the board and the number of queens for full solve
+
+        queen_counter : int
+            The number of queens currently on the board.
+
+        valid_list : list<NumberElement>
+            The number of valid remaining spaces.
+
+        queen_list : list<NumberElement>
+            The squares that contain queens so far.
+    """
 
     def __init__(self, in_n):
         self.n = in_n
@@ -12,63 +27,40 @@ class Board:
 
         for i in range(in_n*in_n):
             self.valid_list.append(NumberElement(i, in_n))
-            print(str(i))
-            # print("[" + str(self.valid_list[i].col_val) + ", " + str(self.valid_list[i].row_val), end='; ')
-            # print(str(self.valid_list[i].diag11_4_val) + ", " + str(self.valid_list[i].diag1_8_val), end=']\n')
-
-        print("\n\n")
 
         self._add_next_queen()
 
     def _add_next_queen(self):
+        """Randomly adds a queen to any valid square
+
+        Adds the chosen queen to the queen list and to the queen counter.
+        Retrieves all values that would create a conflict set from the square
+        Then removes any conflicting squares from the valid_list.
+        This ensures that no conflicting square is randomly selected later.
+        """
         rand_valid = random.randint(0, len(self.valid_list) - 1)
 
         removing = self.valid_list[rand_valid]
         self.queen_list.append(removing)
-        print("queened: " + str(removing.col_val) + ", " + str(removing.row_val), end=' ')
-        print("; " + str(removing.diag11_4_val) + ", " + str(removing.diag1_8_val), end='\n')
-
-        print("Current queen list: ")
-        for i in range(len(self.queen_list)):
-            print("\t[" + str(self.queen_list[i].col_val) + ", " + \
-                    str(self.queen_list[i].row_val) + "]")
+        self.queen_counter += 1
 
         del_row_val = removing.row_val
         del_col_val = removing.col_val
         del_diag11_4_val = removing.diag11_4_val
         del_diag1_8_val = removing.diag1_8_val
 
-        # print("Removed: ", end='\n')
-        # for i in self.valid_list:
-        #     print("[" + str(i.col_val) + ", " + str(i.row_val), end='; ')
-        #     print(str(i.diag11_4_val) + ", " + str(i.diag1_8_val) + "]", end=' ')
-        #     if (i.row_val == del_row_val) or \
-        #             (i.col_val == del_col_val) or \
-        #             (i.diag11_4_val == del_diag11_4_val) or \
-        #             (i.diag11_4_val == del_diag11_4_val):
-        #         self.valid_list.remove(i)
-        #         print("\tremoved")
-        #     else:
-        #         print("\tstays")
-        # print("\n")
-
-        # to_remove = []
-
         for i in range(len(self.valid_list)-1, -1, -1):
-            print(str(i))
             if (self.valid_list[i].row_val == del_row_val) or \
                     (self.valid_list[i].col_val == del_col_val) or \
                     (self.valid_list[i].diag11_4_val == del_diag11_4_val) or \
                     (self.valid_list[i].diag1_8_val == del_diag1_8_val):
-                        # to_remove.append(i)
                         del self.valid_list[i]
-
-        # for index in reversed(to_remove):
-        #     del self.valid_list[index]
 
         self._find_next_step()
 
     def _find_next_step(self):
+        """Will determine if the exit condition has been reached or not.
+        """
         if self.queen_counter == self.n:
             self.print_board(True)
         elif not self.valid_list:
@@ -77,6 +69,13 @@ class Board:
             self._add_next_queen()
 
     def print_board(self, full_solution):
+        """Formats the board for printing.
+
+        Parameters
+        ----------
+            full_solution : boolean
+                A flag that determines what kind of solve has been achieved.
+        """
         if full_solution:
             print("Full solution found:\n")
         else:
@@ -110,6 +109,8 @@ class Board:
         print("Try again? (y/n)")
 
     def _print_line_thing(self):
+        """Small thingy to format the edges of the board.
+        """
         print("+-", end='')
         for i in range(0, self.n):
             print("--", end='')
