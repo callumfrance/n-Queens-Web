@@ -13,7 +13,9 @@ class Board:
         for i in range(0, n*n-1):
             self.valid_list[i] = NumberElement(i, n)
 
-    def add_next_queen(self):
+        self._add_next_queen()
+
+    def _add_next_queen(self):
         rand_valid = randint(0, len(self.valid_list))
 
         removing = self.valid_list[rand_valid]
@@ -33,12 +35,38 @@ class Board:
 
         self.find_next_step()
 
-    def find_next_step(self):
+    def _find_next_step(self):
         if self.queen_counter = n:
-            # Successfully finished program
-            pass
+            self.print_board(True)
         elif not self.valid_list:
-            # Partial solution found
-            pass
+            self.print_board(False)
         else:
             self.add_next_queen()
+
+    def print_board(self, full_solution):
+        if full_solution:
+            print("Full solution found:\n")
+        else:
+            print("Partial solution found:\n")
+
+        self._print_line_thing()
+
+        for i in range(0, n):  # x dimension i.e. rows
+            print("|", end=' ')
+            for k in range(0, n):  # y dimension i.e. columns
+                for queen in self.queen_list:
+                    if queen.row_val == i and queen.col_val == k:
+                        print("Q", end=' ')
+                    else:
+                        print("-", end=' ')
+            print("|", end='\n')
+
+        self._print_line_thing()
+
+        print("Try again? (y/n)")
+
+    def _print_line_thing(self):
+        print("+-", end='')
+        for i in range(0, n):
+            print("--", end='')
+        print("+", end='\n')
