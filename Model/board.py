@@ -12,8 +12,11 @@ class Board:
 
         for i in range(in_n*in_n):
             self.valid_list.append(NumberElement(i, in_n))
+            print(str(i))
             # print("[" + str(self.valid_list[i].col_val) + ", " + str(self.valid_list[i].row_val), end='; ')
             # print(str(self.valid_list[i].diag11_4_val) + ", " + str(self.valid_list[i].diag1_8_val), end=']\n')
+
+        print("\n\n")
 
         self._add_next_queen()
 
@@ -35,19 +38,33 @@ class Board:
         del_diag11_4_val = removing.diag11_4_val
         del_diag1_8_val = removing.diag1_8_val
 
-        print("Removed: ", end='\n')
-        for i in self.valid_list:
-            print("[" + str(i.col_val) + ", " + str(i.row_val), end='; ')
-            print(str(i.diag11_4_val) + ", " + str(i.diag1_8_val) + "]", end=' ')
-            if (i.row_val == del_row_val) or \
-                    (i.col_val == del_col_val) or \
-                    (i.diag11_4_val == del_diag11_4_val) or \
-                    (i.diag11_4_val == del_diag11_4_val):
-                self.valid_list.remove(i)
-                print("\tremoved")
-            else:
-                print("\tstays")
-        print("\n")
+        # print("Removed: ", end='\n')
+        # for i in self.valid_list:
+        #     print("[" + str(i.col_val) + ", " + str(i.row_val), end='; ')
+        #     print(str(i.diag11_4_val) + ", " + str(i.diag1_8_val) + "]", end=' ')
+        #     if (i.row_val == del_row_val) or \
+        #             (i.col_val == del_col_val) or \
+        #             (i.diag11_4_val == del_diag11_4_val) or \
+        #             (i.diag11_4_val == del_diag11_4_val):
+        #         self.valid_list.remove(i)
+        #         print("\tremoved")
+        #     else:
+        #         print("\tstays")
+        # print("\n")
+
+        # to_remove = []
+
+        for i in range(len(self.valid_list)-1, -1, -1):
+            print(str(i))
+            if (self.valid_list[i].row_val == del_row_val) or \
+                    (self.valid_list[i].col_val == del_col_val) or \
+                    (self.valid_list[i].diag11_4_val == del_diag11_4_val) or \
+                    (self.valid_list[i].diag1_8_val == del_diag1_8_val):
+                        # to_remove.append(i)
+                        del self.valid_list[i]
+
+        # for index in reversed(to_remove):
+        #     del self.valid_list[index]
 
         self._find_next_step()
 
