@@ -100,13 +100,9 @@ class Board:
 
         self._print_line_thing()
 
+        print("\nn: " + str(self.n))
         print("Number of queens: " + str(len(self.queen_list)))
-        for x in range(0, len(self.queen_list)):
-            print(str(type(self.queen_list[x].row_val)), end='\t')
-            print(str(self.queen_list[x].col_val), end='\t')
-            print(str(self.queen_list[x].row_val), end='\n')
-
-        print("Try again? (y/n)")
+        print("\nTry again? (y/n)")
 
     def _print_line_thing(self):
         """Small thingy to format the edges of the board.
