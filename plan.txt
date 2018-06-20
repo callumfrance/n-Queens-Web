@@ -1,0 +1,25 @@
+1. Create Board using 'n'
+	- create n column sets
+	- create n row sets
+	- create 2n-1 diag11_4 sets with [1, n:1] , [2:n, 1] seeds
+	- create 2n-1 diag1_8 sets with [n, n:1] , [n-1:1, 1] seeds
+
+	- every row, column, and diagonal is UNUSED
+
+	- create an initially empty valid space set
+
+2. Create n Queen objects
+
+3. Place a queen on a random valid space
+	- Set corresponding row, column, diag11_4, diag1_8 to USED
+
+4. Check valid spaces
+	- generate row/column permutations of both UNUSED, and for each:
+		- check if row/col lands inside an UNUSED diag11_4
+		- check if row/col lands inside an UNUSED diag1_8
+		- if all tests are passed, add this to the valid space set
+	- Returns a set of valid spaces that can be randomly selected from
+
+5 Check if finished (exit program here if so)
+	- if number of queens = n
+	- if no more queens can be added to the board
