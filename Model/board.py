@@ -1,12 +1,14 @@
 import random
 from number_element import NumberElement
 
+
 class Board:
 
     def __init__(self, in_n):
         self.n = in_n
         self.queen_counter = 0
         self.valid_list = list()
+        self.queen_list = list()
 
         for i in range(0, n*n-1):
             self.valid_list[i] = NumberElement(i, n)
@@ -15,6 +17,7 @@ class Board:
         rand_valid = randint(0, len(self.valid_list))
 
         removing = self.valid_list[rand_valid]
+        self.queen_list.append(removing)
 
         del_row_val = removing.row_val
         del_col_val = removing.col_val
