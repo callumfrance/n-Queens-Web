@@ -1,4 +1,4 @@
-nQueens
+n-Queens
 -------
 
 ![diagram of n-queens problem](https://raw.githubusercontent.com/callumfrance/nQueens/master/8queens.jpg)
@@ -11,7 +11,7 @@ This program places Queens randomly, so using numbers bigger than 5 will
 almost certainly only give a partial solve.
 
 
-Also note that nQueens is impossible for `n = 3` or `n = 4` (which you can
+Also note that n-Queens is impossible for `n = 3` or `n = 4` (which you can
 see by running the program).
 
 
