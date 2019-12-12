@@ -1,5 +1,5 @@
 from board import Board
-
+from view import View
 
 if __name__ == "__main__":
     to_exit = False
@@ -15,3 +15,5 @@ if __name__ == "__main__":
             del b
         else:
             break
+
+# TODO make this into a controller file so that the view and model do not communicate directly to each other
