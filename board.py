@@ -24,6 +24,7 @@ class Board:
         self.queen_counter = 0
         self.valid_list = list()
         self.queen_list = list()
+        self.full_solution = False
 
         for i in range(in_n*in_n):
             self.valid_list.append(NumberElement(i, in_n))
@@ -62,52 +63,10 @@ class Board:
         """Will determine if the exit condition has been reached or not.
         """
         if self.queen_counter == self.n:
-            self.print_board(True)
+            self.full_solution = True
+            return(self)
         elif not self.valid_list:
-            self.print_board(False)
+            self.full_solution = False
+            return(self)
         else:
             self._add_next_queen()
-
-    def print_board(self, full_solution):
-        """Formats the board for printing.
-
-        Parameters
-        ----------
-            full_solution : boolean
-                A flag that determines what kind of solve has been achieved.
-        """
-        if full_solution:
-            print("Full solution found:\n")
-        else:
-            print("Partial solution found:\n")
-
-        self._print_line_thing()
-
-        for i in range(self.n):  # x dimension i.e. rows
-            print("|", end=' ')
-            for k in range(self.n):  # y dimension i.e. columns
-                queen_counter = 0
-                for queen in self.queen_list:
-                    if queen.row_val == i + 1 and queen.col_val == k + 1:
-                        queen_counter += 1
-                if queen_counter == 1:
-                    print("Q", end=' ')
-                elif queen_counter > 1:
-                    print("K", end=' ')  # this should never be reached
-                else:
-                    print("-", end=' ')
-            print("|", end='\n')
-
-        self._print_line_thing()
-
-        print("\nn: " + str(self.n))
-        print("Number of queens: " + str(len(self.queen_list)))
-        print("\nTry again? (y/n)")
-
-    def _print_line_thing(self):
-        """Small thingy to format the edges of the board.
-        """
-        print("+-", end='')
-        for i in range(0, self.n):
-            print("--", end='')
-        print("+", end='\n')
