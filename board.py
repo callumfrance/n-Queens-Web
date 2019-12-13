@@ -17,8 +17,10 @@ class Board:
 
         queen_list : list<NumberElement>
             The squares that contain queens so far.
-    """
 
+        full_solution: Boolean
+            Identifies if this board contains a full 'n' solution.
+    """
     def __init__(self, in_n):
         self.n = in_n
         self.queen_counter = 0
@@ -26,7 +28,7 @@ class Board:
         self.queen_list = list()
         self.full_solution = False
 
-        for i in range(in_n*in_n):
+        for i in range(in_n * in_n):
             self.valid_list.append(NumberElement(i, in_n))
 
         self._add_next_queen()
@@ -50,12 +52,12 @@ class Board:
         del_diag11_4_val = removing.diag11_4_val
         del_diag1_8_val = removing.diag1_8_val
 
-        for i in range(len(self.valid_list)-1, -1, -1):
+        for i in range(len(self.valid_list) - 1, -1, -1):
             if (self.valid_list[i].row_val == del_row_val) or \
                     (self.valid_list[i].col_val == del_col_val) or \
                     (self.valid_list[i].diag11_4_val == del_diag11_4_val) or \
                     (self.valid_list[i].diag1_8_val == del_diag1_8_val):
-                        del self.valid_list[i]
+                del self.valid_list[i]
 
         self._find_next_step()
 
@@ -64,9 +66,9 @@ class Board:
         """
         if self.queen_counter == self.n:
             self.full_solution = True
-            return(self)
+            return (self)
         elif not self.valid_list:
             self.full_solution = False
-            return(self)
+            return (self)
         else:
             self._add_next_queen()

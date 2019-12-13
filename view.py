@@ -1,4 +1,4 @@
-display_types = ('cli', 'plaintext', 'file')
+display_types = ('cli', 'plaintext', 'file')  # Set of possible display types
 
 
 class View:
@@ -8,7 +8,6 @@ class View:
 
     It could also be displayed other ways
     """
-
     def __init__(self, in_disp_type="cli", output_file_name=None):
         if in_disp_type in display_types:
             self.disp_type = in_disp_type
@@ -17,8 +16,9 @@ class View:
         if output_file_name:
             self.output_file_name = output_file_name
 
-
     def print_board_plaintext(self, full_solution, n, queen_list):
+        """Returns a string view of the n-Queens board.
+        """
         print_board_val = ''
         if full_solution:
             print_board_val += "Full solution found:\n\n"
@@ -37,7 +37,7 @@ class View:
                 if queen_counter == 1:
                     print_board_val += "Q "
                 elif queen_counter > 1:
-                    print_board_val += "K " # this should never be reached
+                    print_board_val += "K "  # this should never be reached
                 else:
                     print_board_val += "- "
             print_board_val += "|\n"
@@ -46,8 +46,9 @@ class View:
 
         return print_board_val
 
-
     def print_board_wrapper(self, full_solution, n, queen_list):
+        """Directs to the correct printing type as specified by self.disp_type.
+        """
         print_val = self.print_board_plaintext(full_solution, n, queen_list)
         if self.disp_type == 'cli':
             print(print_val)
@@ -57,7 +58,6 @@ class View:
             with open(self.output_file_name, "a") as f:
                 f.write(print_val)
         return print_val
-
 
     def _print_line_thing_plaintext(self, n):
         """Small thingy to format the edges of the board.
