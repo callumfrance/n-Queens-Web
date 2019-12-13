@@ -17,14 +17,19 @@ filename = ''
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
-        if (sys.argv[1] == 'cli') 
-                or (sys.argv[1] == 'plaintext'
-                or (sys.argv[1] == 'file'):
+        if (sys.argv[1] == 'cli') \
+                or (sys.argv[1] == 'plaintext'):
             view = View(sys.argv[1])
+
+        elif (sys.argv[1] == 'file') and (len(sys.argv) > 3):
+                filename = sys.argv[3]
+                view = View(sys.argv[1], sys.argv[3])
+    else: # Default the view to be using the command line interface
+        view = View('cli')
+
     if len(sys.argv) > 2:
         a = int(sys.argv[2])
-    if (sys.argv[1] == 'file') and (len(sys.argv) > 3):
-            filename = sys.argv[3]
+
     else:
         print("What 'n' would you like to use?")
         a = int(input("\n> "))
@@ -32,5 +37,3 @@ if __name__ == "__main__":
     b = Board(a)
     view.print_board_wrapper(b.full_solution, b.n, b.queen_list)
 
-
-# TODO add print output to a file with name specified via the cli

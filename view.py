@@ -1,4 +1,4 @@
-display_types = ('cli', 'plaintext')
+display_types = ('cli', 'plaintext', 'file')
 
 
 class View:
@@ -9,19 +9,15 @@ class View:
     It could also be displayed other ways
     """
 
-    def __init__(self, in_disp_type="cli"):
+    def __init__(self, in_disp_type="cli", output_file_name=None):
         if in_disp_type in display_types:
             self.disp_type = in_disp_type
         else:
             self.disp_type = display_types[0]
+        if output_file_name:
+            self.output_file_name = output_file_name
 
-#   def print_menu_wrapper(self):
-#       print_val = "What 'n' would you like to use?"
-#       if self.disp_type = 'cli':
-#           print(print_val)
-#       else if self.disp_type 'plaintext':
-#           return print_val
-    
+
     def print_board_plaintext(self, full_solution, n, queen_list):
         print_board_val = ''
         if full_solution:
@@ -52,11 +48,14 @@ class View:
 
 
     def print_board_wrapper(self, full_solution, n, queen_list):
-        print_val = ''
+        print_val = self.print_board_plaintext(full_solution, n, queen_list)
         if self.disp_type == 'cli':
-            print(self.print_board_plaintext(full_solution, n, queen_list))
+            print(print_val)
         elif self.disp_type == 'plaintext':
-            print_val = self.print_board_plaintext(full_solution, n, queen_list)
+            pass
+        elif self.disp_type == 'file':
+            with open(self.output_file_name, "a") as f:
+                f.write(print_val)
         return print_val
 
 
