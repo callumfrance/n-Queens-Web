@@ -1,7 +1,7 @@
 import os
 
 from flask import (
-        Flask, render_template
+        Flask, render_template, request, url_for, redirect, flash
 )
 
 from .mvc import main
@@ -22,9 +22,26 @@ def create_app(test_config=None):
     def hello():
         return('Hello world')
 
-    @app.route('/n_queens/<n_size>')
+    @app.route('/n_queens/<int:n_size>')
     def n_queens(n_size=5):
-        b = main.run_n_queens('html', int(n_size))
-        return render_template('base.html', board_display=b, n_size=n_size)
+        b = main.run_n_queens('html', n_size)
+        return render_template('board.html', board_display=b, n_size=n_size)
+
+    @app.route('/board_select', methods=('GET', 'POST'))
+    def board_select():
+        if request.method == 'POST':
+            n_size_bs = request.form['n_size']
+            error = None
+
+            if n_size_bs is None:
+                error = 'n_size_bs was not set'
+
+            if error is None:
+                return redirect(url_for('n_queens', n_size=n_size_bs))
+            else:
+                flash(error)
+
+        return render_template('board_select.html')
+
 
     return app

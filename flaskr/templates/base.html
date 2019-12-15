@@ -1,8 +1,9 @@
 <!doctype html>
+
 <title>N Queens Board</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='board.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% block stylesheets %}{% endblock %}
+
 <section class="content">
-	<h1>n-queens board</h1>
-	<code>n = {{ n_size }}</code>
-	{{ board_display | safe }}
+	{% block content %}{% endblock %}
 </section>
