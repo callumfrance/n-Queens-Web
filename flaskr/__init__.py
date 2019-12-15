@@ -22,6 +22,6 @@ def create_app(test_config=None):
 
     @app.route('/n_queens')
     def n_queens():
-        return main.run_n_queens('plaintext', 5)
+        return main.run_n_queens('html', 5)
 
     return app

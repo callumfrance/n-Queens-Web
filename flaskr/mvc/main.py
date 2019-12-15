@@ -6,6 +6,7 @@ Examples of ways to execute the program:
     python main.py
     python main.py cli <n>
     python main.py plaintext <n>
+    python main.py html <n>
     python main.py file <n> <filename>
 
 Systems arguments:
@@ -30,6 +31,8 @@ def determine_view(view_string, filename=None):
             view = View(view_string, filename)
         else:  # Default the filename as 'output.txt'
             view = View(view_string, "output.txt")
+    elif (view_string == 'html'):
+        view = View(view_string, filename)
 
     else:  # Default the view to be using the command line interface
         view = View('cli')

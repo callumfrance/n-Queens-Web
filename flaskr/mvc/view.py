@@ -1,4 +1,5 @@
-display_types = ('cli', 'plaintext', 'file')  # Set of possible display types
+# Set of possible display types
+display_types = ('cli', 'plaintext', 'file', 'html')
 
 
 class View:
@@ -16,16 +17,44 @@ class View:
         if output_file_name:
             self.output_file_name = output_file_name
 
+    def print_board_html(self, full_solution, n, queen_list):
+        """Returns a string view of the n-Queens board.
+        """
+        print_board_val = ''
+        if full_solution:
+            print_board_val += "Full solution found:<br><br>"
+        else:
+            print_board_val += "Partial solution found:<br><br>"
+
+        print_board_val += self._print_line_thing_html(n)
+
+        for i in range(n):  # x dimension i.e. rows
+            print_board_val += '<span class="board edge vertical">|</span> '
+            for k in range(n):  # y dimension i.e. columns
+                queen_counter = 0
+                for queen in queen_list:
+                    if queen.row_val == i + 1 and queen.col_val == k + 1:
+                        queen_counter += 1
+                if queen_counter == 1:
+                    print_board_val += '<span class="board queen">Q</span> '
+                elif queen_counter > 1:  # this should never be reached
+                    print_board_val += '<span class="board king">K</span> '
+                else:
+                    print_board_val += '<span class="board blank">-</span> '
+            print_board_val += '<span class="board edge vertical">|</span><br>'
+
+        print_board_val += self._print_line_thing_html(n)
+
+        return print_board_val
+
     def print_board_plaintext(self, full_solution, n, queen_list):
         """Returns a string view of the n-Queens board.
         """
         print_board_val = ''
         if full_solution:
-            # print_board_val += "Full solution found:\n\n"
-            print_board_val += "Full solution found:<br><br>"
+            print_board_val += "Full solution found:\n\n"
         else:
-            # print_board_val += "Partial solution found:\n\n"
-            print_board_val += "Partial solution found:<br><br>"
+            print_board_val += "Partial solution found:\n\n"
 
         print_board_val += self._print_line_thing_plaintext(n)
 
@@ -42,8 +71,7 @@ class View:
                     print_board_val += "K "  # this should never be reached
                 else:
                     print_board_val += "- "
-            # print_board_val += "|\n"
-            print_board_val += "|<br>"
+            print_board_val += "|\n"
 
         print_board_val += self._print_line_thing_plaintext(n)
 
@@ -60,7 +88,24 @@ class View:
         elif self.disp_type == 'file':
             with open(self.output_file_name, "a") as f:
                 f.write(print_val)
+        elif self.disp_type == 'html':
+            print_val = self.print_board_html(full_solution, n, queen_list)
         return print_val
+
+    def _print_line_thing_html(self, n):
+        """Small thingy to format the edges of the board.
+        
+        Formatted in HTML using span tags and the following classes:
+            {board, corner, edge, horizontal}
+        """
+        line_val = ''
+        line_val += '<span class="board corner">+</span>'
+        line_val += '<span class="board edge horizontal>-</span>'
+        for i in range(0, 4*n):
+            line_val += '<span class="board edge horizontal>-</span>'
+        line_val += '<span class="board corner">+</span><br>'
+
+        return line_val
 
     def _print_line_thing_plaintext(self, n):
         """Small thingy to format the edges of the board.
@@ -69,7 +114,6 @@ class View:
         line_val += '+-'
         for i in range(0, n):
             line_val += '--'
-        # line_val += '+\n'
-        line_val += '+<br>'
+        line_val += '+\n'
 
         return line_val
