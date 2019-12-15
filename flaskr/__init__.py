@@ -22,9 +22,9 @@ def create_app(test_config=None):
     def hello():
         return('Hello world')
 
-    @app.route('/n_queens')
-    def n_queens():
-        a = main.run_n_queens('html', 5)
-        return render_template('base.html', board_display=a)
+    @app.route('/n_queens/<n_size>')
+    def n_queens(n_size=5):
+        b = main.run_n_queens('html', int(n_size))
+        return render_template('base.html', board_display=b, n_size=n_size)
 
     return app
