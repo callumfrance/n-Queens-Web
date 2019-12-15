@@ -1,6 +1,8 @@
 import os
 
-from flask import Flask
+from flask import (
+        Flask, render_template
+)
 
 from .mvc import main
 
@@ -22,6 +24,7 @@ def create_app(test_config=None):
 
     @app.route('/n_queens')
     def n_queens():
-        return main.run_n_queens('html', 5)
+        a = main.run_n_queens('html', 5)
+        return render_template('base.html', board_display=a)
 
     return app

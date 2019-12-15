@@ -1,0 +1,10 @@
+<!doctype html>
+<title>N Queens Board</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='board.css') }}">
+<section class="content">
+	<p>
+	n-queens board
+	<br>
+	{{ board_display | safe }}
+	</p>
+</section>
