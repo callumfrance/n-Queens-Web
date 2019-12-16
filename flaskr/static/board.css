@@ -8,6 +8,18 @@ code {
 	font-style: italic;
 }
 
+button {
+	background: peachpuff;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+button a {
+	background: peachpuff;
+	color: inherit;
+	text-decoration: none;
+}
+
 .board_section .content {
 	display: flex;
 	flex-direction: column;

@@ -19,9 +19,9 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    @app.route('/hello')
-    def hello():
-        return('Hello world')
+    @app.route('/')
+    def base():
+        return redirect(url_for('board_select'))
 
     @app.route('/n_queens/<int:n_size>')
     def n_queens(n_size=5):
