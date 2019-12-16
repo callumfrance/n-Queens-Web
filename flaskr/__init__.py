@@ -28,6 +28,9 @@ def create_app(test_config=None):
         if n_size > 50:
             n_size = 50
             flash('For performance reasons, n has been capped to 50')
+        elif n_size < 1:
+            n_size = 1
+            flash('n must be at least 1 (obviously)')
 
         b = main.run_n_queens('html', n_size)
         return render_template('board.html', board_display=b, n_size=n_size)
@@ -39,7 +42,7 @@ def create_app(test_config=None):
             error = None
 
             if n_size_bs is None:
-                error = 'n_size_bs was not set'
+                error = 'n was not set'
 
             if error is None:
                 return redirect(url_for('n_queens', n_size=n_size_bs))
