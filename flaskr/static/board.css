@@ -1,4 +1,4 @@
-* {
+.board_section * {
 	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 24px;
 }
@@ -8,13 +8,13 @@ code {
 	font-style: italic;
 }
 
-.content {
+.board_section .content {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
 }
 
-.board {
+.board_section .board {
 	width: 50px;
 	height: 50px;
 	display: block;
@@ -23,23 +23,23 @@ code {
 	line-height: 50px;
 }
 
-.board.row {
+.board_section .board.row {
 	display: flex;
 	flex-direction: row;
 }
 
-.row {
+.board_section .row {
 	width: 100%;
 }
 
-.edge, .horizontal, .vertical {
+.board_section .edge, .horizontal, .vertical {
 	background: grey;
 }
 
-.queen {
+.board_section .queen {
 	background: goldenrod;
 }
 
-.blank {
+.board_section .blank {
 	background: linen;
 }

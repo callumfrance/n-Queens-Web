@@ -22,9 +22,9 @@ class View:
         """
         print_board_val = ''
         if full_solution:
-            print_board_val += '<div class="board row text">Full solution found:</div><br><br>'
+            print_board_val += '<div class="board row text">Full solution found:</div><br>'
         else:
-            print_board_val += '<div class="board row text">Partial solution found:</div><br><br>'
+            print_board_val += '<div class="board row text">Partial solution found:</div><br>'
 
         print_board_val += self._print_line_thing_html(n)
 
@@ -41,7 +41,7 @@ class View:
                     print_board_val += '<div class="board king">K</div>'
                 else:
                     print_board_val += '<div class="board blank">-</div>'
-            print_board_val += '<div class="board edge vertical">|</div></div><br>'
+            print_board_val += '<div class="board edge vertical">|</div></div>'
 
         print_board_val += self._print_line_thing_html(n)
 
@@ -104,7 +104,7 @@ class View:
         line_val += '<div class="board edge horizontal>-</div>'
         for i in range(0, 2*n):
             line_val += '<div class="board edge horizontal>-</div>'
-        line_val += '<div class="board corner">+</div></div><br>'
+        line_val += '<div class="board corner">+</div></div>'
 
         return line_val
 

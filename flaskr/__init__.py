@@ -9,6 +9,7 @@ from .mvc import main
 def create_app(test_config=None):
     # creates and configures the app
     app = Flask(__name__, instance_relative_config=True)
+    app.secret_key = "test"
     
     if test_config is None:
         app.config.from_pyfile('config.py', silent=True)
@@ -24,6 +25,10 @@ def create_app(test_config=None):
 
     @app.route('/n_queens/<int:n_size>')
     def n_queens(n_size=5):
+        if n_size > 50:
+            n_size = 50
+            flash('For performance reasons, n has been capped to 50')
+
         b = main.run_n_queens('html', n_size)
         return render_template('board.html', board_display=b, n_size=n_size)
 

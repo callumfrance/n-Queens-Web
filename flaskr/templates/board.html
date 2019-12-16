@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block title %}Board{% endblock %}
+
 {% block stylesheets %}
 	<link rel="stylesheet" href="{{ url_for('static', filename='board.css') }}">
 {% endblock %}
@@ -7,5 +9,7 @@
 {% block content %}
 	<h1>n-queens board</h1>
 	<code>n = {{ n_size }}</code>
-	{{ board_display | safe }}
+	<div class="board_section">
+		{{ board_display | safe }}
+	</div>
 {% endblock %}
